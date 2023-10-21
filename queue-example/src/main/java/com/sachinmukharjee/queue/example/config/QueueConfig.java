@@ -42,6 +42,4 @@ public class QueueConfig {
 		factory.setPubSubDomain(true);
 		return factory;
 	}
-
-
 }
