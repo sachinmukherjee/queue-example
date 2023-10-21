@@ -32,7 +32,6 @@ public class QueueConfig {
 		JmsTemplate jmsTemplate = new JmsTemplate();
 		jmsTemplate.setConnectionFactory(createConnectionFactory());
 		jmsTemplate.setPubSubNoLocal(true);
-		jmsTemplate.setMessageConverter(jacksonJMSMessageConverter());
 		return jmsTemplate;
 	}
 
@@ -41,16 +40,8 @@ public class QueueConfig {
 		DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
 		factory.setConnectionFactory(createConnectionFactory());
 		factory.setPubSubDomain(true);
-		factory.setMessageConverter(jacksonJMSMessageConverter());
 		return factory;
 	}
 
-	@Bean
-	public MessageConverter jacksonJMSMessageConverter() {
-		MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
-		converter.setTargetType(MessageType.OBJECT);
-		converter.setTypeIdPropertyName("_type");
-		return converter;
-	}
 
 }
